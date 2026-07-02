@@ -1,0 +1,395 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[a4paper,margin=2.2cm,headheight=14pt]{geometry}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+
+% =====================================================
+% PALETA UTEQ
+% =====================================================
+\definecolor{uteqBlue}{HTML}{0E3F7E}
+\definecolor{uteqMid}{HTML}{1E5AA8}
+\definecolor{uteqTeal}{HTML}{2E86A1}
+\definecolor{uteqGreen}{HTML}{4FAE60}
+\definecolor{uteqAmber}{HTML}{F2A413}
+\definecolor{uteqGray}{HTML}{5A6470}
+\definecolor{uteqRed}{HTML}{C0392B}
+
+% =====================================================
+% ESTILOS
+% =====================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=uteqBlue,
+    urlcolor=uteqMid,
+    citecolor=uteqTeal
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{uteqBlue}\textbf{UTEQ} — Ing. de Software}
+\fancyhead[R]{\footnotesize\color{uteqBlue}Aplicaciones Distribuidas (ISR-701)}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\footnotesize\color{uteqGray}EV-PR-U2 — Período 2026-2027}
+\fancyfoot[R]{\footnotesize\color{uteqGray}Prof. Guerrero Ulloa G.C.}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{uteqBlue}\hrule width\headwidth height\headrulewidth}}
+
+\titleformat{\section}
+    {\color{uteqBlue}\normalfont\Large\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}
+    {\color{uteqMid}\normalfont\large\bfseries}{\thesubsection.}{0.6em}{}
+
+% =====================================================
+% CAJAS
+% =====================================================
+\newtcolorbox{infobox}[1][]{
+    enhanced,
+    colback=uteqBlue!5,
+    colframe=uteqBlue,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fonttitle=\bfseries,
+    coltitle=white,
+    colbacktitle=uteqBlue,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{warnbox}[1][]{
+    enhanced,
+    colback=uteqAmber!10,
+    colframe=uteqAmber,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fonttitle=\bfseries,
+    coltitle=white,
+    colbacktitle=uteqAmber,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{scenariobox}{
+    enhanced,
+    colback=uteqTeal!8,
+    colframe=uteqTeal,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    breakable
+}
+
+% =====================================================
+% TÍTULO
+% =====================================================
+\title{
+    \color{uteqBlue}\textbf{Examen Práctico --- Unidad 2}\\[0.4em]
+    \large\color{uteqMid}Arquitecturas Distribuidas: Microservicios, APIs RESTful y Contenerización\\[0.2em]
+    \normalsize\color{uteqGray}Aplicaciones Distribuidas (ISR-701)
+}
+\author{}
+\date{\small Período académico 2026-2027}
+
+% =====================================================
+% DOCUMENTO
+% =====================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\vspace{-1.5em}
+
+% ===== DATOS GENERALES =====
+\noindent
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{uteqBlue}}l|X|}
+    \hline
+        Asignatura              & Aplicaciones Distribuidas (ISR-701) \\
+    \hline
+        Unidad                  & 2 --- Arquitecturas Distribuidas \\
+    \hline
+        Tipo de evaluación      & Examen práctico de unidad --- Individual \\
+    \hline
+        Modalidad               & Laboratorio con defensa técnica oral \\
+    \hline
+        Duración                & 3 horas de laboratorio \\
+    \hline
+        Período académico       & 2026-2027 \\
+    \hline
+        Código del instrumento  & EV-PR-U2 (ajustable según planificación) \\
+    \hline
+        Docente                 & GUERRERO ULLOA GLEISTON CICERON \\
+    \hline
+\end{tabularx}
+
+\vspace{0.5em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\bfseries\color{uteqBlue}}l|X|}
+    \hline
+        Estudiante              & Jeremy Ruperto Gaibor Rodriguez \\
+    \hline
+        Fecha                   & 02/07/2026 \\
+    \hline
+        URL del repositorio     & https://github.com/JeremyGaibor/Evaluacion-Parcial \\
+    \hline
+        Calificación (sobre 10) & \rule{0.15\textwidth}{0.4pt} \\
+    \hline
+\end{tabularx}
+
+\vspace{0.8em}
+
+% ===== SECCIÓN 1 =====
+\section{Competencia y resultado de aprendizaje evaluados}
+
+Este examen valora la capacidad del estudiante para \textbf{aplicar arquitecturas y patrones de diseño distribuido} —microservicios, APIs REST y contenerización con Docker— para construir un sistema funcional, desplegable y con separación clara de dominios. En términos concretos, se evalúa la habilidad para: (i) descomponer un dominio de negocio en microservicios independientes con su propia base de datos siguiendo el patrón \emph{Database per Service}~\cite{Richardson2018Patterns}; (ii) diseñar APIs RESTful conformes a las restricciones de Fielding~\cite{Fielding2000REST}, alcanzando al menos el Nivel 2 del modelo de madurez de Richardson en cuanto al uso disciplinado de verbos HTTP y códigos de estado; (iii) implementar comunicación inter-servicio síncrona con manejo básico de fallos; (iv) contenerizar cada microservicio con \emph{multi-stage build} para minimizar la superficie de ataque y el tamaño de imagen~\cite{Newman2021Microservices}; y (v) orquestar el conjunto con Docker Compose, incluyendo red interna dedicada, \emph{healthchecks} y \emph{reverse proxy}, siguiendo patrones de despliegue documentados en la literatura~\cite{Aksakalli2021Deployment}.
+
+% ===== SECCIÓN 2 =====
+\section{Planteamiento del problema}
+
+\begin{scenariobox}
+\textbf{Caso: MercadoQuevedo --- Marketplace distribuido para comerciantes locales}
+
+\medskip
+
+\emph{MercadoQuevedo} es una plataforma en línea, aún en fase de prototipo, para que pequeños comerciantes del cantón Quevedo publiquen productos y reciban pedidos. El emprendedor propietario ha reconocido que su implementación actual —un monolito Django— dificulta el crecimiento y solicita al equipo de Ingeniería de Software una \textbf{prueba de concepto} basada en microservicios que evidencie tres capacidades: separación de dominios, exposición RESTful bien diseñada y despliegue reproducible en contenedores.
+
+\medskip
+
+El sistema, en su alcance mínimo, debe distinguir dos dominios de negocio:
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em]
+    \item \textbf{Catálogo de productos:} altas, bajas, modificaciones y consultas de productos, con atributos mínimos (SKU, nombre, precio, \emph{stock}).
+    \item \textbf{Gestión de pedidos:} creación de pedidos que referencian uno o más productos, cálculo de subtotales, y consulta del estado del pedido.
+\end{itemize}
+
+\medskip
+
+La creación de un pedido requiere que el servicio de pedidos consulte al de catálogo para \textbf{verificar la existencia y disponibilidad} del producto. No se evalúa la calidad estética de la interfaz, la persistencia optimizada ni escenarios de alta concurrencia; se evalúa la \textbf{correcta aplicación de los estilos y patrones estudiados en la Unidad 2}.
+\end{scenariobox}
+
+Su tarea es construir un prototipo funcional del sistema y desplegarlo con Docker Compose, evidenciando los principios de la Unidad 2: separación en microservicios, diseño RESTful correcto, comunicación inter-servicio, contenerización con \emph{multi-stage build} y orquestación con \emph{reverse proxy}.
+
+% ===== SECCIÓN 3 =====
+\section{Requerimientos a implementar}
+
+\subsection*{Parte A --- Arquitectura de microservicios y diseño en capas (peso orientativo 20\,\%)}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item Implemente al menos \textbf{dos microservicios independientes}: \texttt{svc-catalogo} y \texttt{svc-pedidos}, cada uno con su propia base de datos (\emph{Database per Service})~\cite{Richardson2018Patterns}.
+    \item Cada microservicio debe organizarse en capas \texttt{controller}, \texttt{service}, \texttt{repository} y \texttt{model} (o equivalente en el \emph{stack} elegido), con separación clara de responsabilidades.
+    \item Entregue un \textbf{diagrama de arquitectura} propio (C4 nivel 2 o UML de despliegue) que identifique: los microservicios, sus bases de datos, el \emph{reverse proxy} y el flujo de peticiones del cliente.
+\end{itemize}
+
+\subsection*{Parte B --- Diseño de la API REST (peso orientativo 25\,\%)}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item Cada microservicio debe exponer una API REST que alcance como mínimo el \textbf{Nivel 2 del modelo de madurez de Richardson}: recursos identificados por URI, uso disciplinado de verbos HTTP (GET, POST, PUT/PATCH, DELETE) y códigos de estado apropiados.
+    \item Las URIs deben seguir las convenciones REST: \textbf{sustantivos en plural}, versionadas (\texttt{/api/v1/\ldots}), sin verbos en la ruta, con IDs en el \emph{path} y no en \emph{query strings}. Ejemplo esperado: \texttt{POST /api/v1/productos}.
+    \item Los códigos de estado deben ser semánticamente correctos. Como mínimo: \texttt{201 Created} en altas exitosas (con cabecera \texttt{Location}), \texttt{204 No Content} en eliminaciones, \texttt{404 Not Found} en recursos inexistentes, \texttt{409 Conflict} en violaciones de unicidad (p.\,ej.\ SKU duplicado), \texttt{400 Bad Request} en JSON malformado y \texttt{422 Unprocessable Entity} en validaciones de dominio.
+    \item Respete la \textbf{idempotencia} de PUT y DELETE, y la \textbf{no idempotencia} de POST.
+    \item Publique la documentación OpenAPI 3.0 (Swagger UI o equivalente) para cada servicio.
+\end{itemize}
+
+\subsection*{Parte C --- Comunicación entre servicios (peso orientativo 15\,\%)}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item Al crear un pedido, \texttt{svc-pedidos} debe invocar por \textbf{HTTP a \texttt{svc-catalogo}} para verificar la existencia y disponibilidad del producto (comunicación síncrona basada en REST).
+    \item Implemente al menos un mecanismo básico de \textbf{manejo de fallos} de esa llamada: \emph{timeout} explícito y respuesta HTTP coherente al cliente si el catálogo no responde (por ejemplo, \texttt{503 Service Unavailable} o \texttt{424 Failed Dependency}).
+    \item Si el producto no existe o no hay \emph{stock} suficiente, el pedido debe rechazarse con el código HTTP y el cuerpo de error apropiados.
+\end{itemize}
+
+\subsection*{Parte D --- Contenerización con Docker (peso orientativo 15\,\%)}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item Cada microservicio debe contar con un \texttt{Dockerfile} \textbf{multi-stage}: una etapa de compilación (con las herramientas de \emph{build}) y una etapa de \emph{runtime} que solo contenga el JRE (o entorno de ejecución) y el artefacto empaquetado.
+    \item La imagen final debe ejecutarse con \textbf{usuario no-\texttt{root}} y exponer únicamente el puerto necesario.
+    \item Justifique la elección de la imagen base en el \texttt{README} (peso, mantenimiento, superficie de ataque).
+\end{itemize}
+
+\subsection*{Parte E --- Orquestación con Docker Compose y \emph{reverse proxy} (peso orientativo 15\,\%)}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item Entregue un \texttt{docker-compose.yml} que levante: los dos microservicios, sus respectivas bases de datos y un \textbf{Nginx} (u otro \emph{reverse proxy}) como puerta de entrada única.
+    \item Defina una \textbf{red interna dedicada} (\emph{bridge network}), \textbf{volúmenes persistentes} para los datos de las bases y \textbf{\emph{healthchecks}} para todos los servicios.
+    \item Los microservicios deben declarar \texttt{depends\_on} sobre sus bases de datos con \texttt{condition:\ service\_healthy}, de modo que solo arranquen cuando la base esté lista para aceptar conexiones.
+    \item El \emph{reverse proxy} debe enrutar externamente \texttt{/api/v1/productos/*} hacia \texttt{svc-catalogo} y \texttt{/api/v1/pedidos/*} hacia \texttt{svc-pedidos}. Solo el puerto de Nginx debe estar expuesto al \emph{host}.
+\end{itemize}
+
+% ===== SECCIÓN 4 =====
+\section{Componente de análisis y defensa técnica}
+
+Al finalizar la implementación, el estudiante registrará sus respuestas en un archivo \texttt{ANALISIS.md} y las defenderá oralmente ante el docente. Las preguntas conectan el prototipo con la teoría de la unidad:
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.3em]
+    \item ¿Cuál de las seis restricciones REST de Fielding~\cite{Fielding2000REST} identifica con mayor claridad en su implementación? Argumente con al menos un extremo del código.
+    \item ¿En qué nivel del modelo de madurez de Richardson se ubica su API? Justifique con un ejemplo concreto de recurso, verbo y código de estado que respalde ese nivel.
+    \item Newman~\cite{Newman2021Microservices} sostiene que la elección entre monolito modular y microservicios debe hacerse en función de \emph{coupling} y \emph{cohesion}. Con base en su prototipo, ¿qué acoplamiento residual observa entre \texttt{svc-catalogo} y \texttt{svc-pedidos} y cómo lo mitigaría en producción?
+    \item Blinowski et al.~\cite{Blinowski2022MonolithVsMS} reportan que, sobre una sola máquina, el monolito puede superar en rendimiento a la versión microservicios equivalente. Ante ese hallazgo, ¿qué justificación técnica sostendría la migración a microservicios en el caso de MercadoQuevedo?
+    \item ¿Qué ganaría y qué perdería su prototipo si reemplazara la comunicación REST entre \texttt{svc-pedidos} y \texttt{svc-catalogo} por gRPC? Argumente en términos de rendimiento, tipado del contrato y consumidores externos.
+    \item Si el proceso de \texttt{svc-catalogo} se detiene, ¿qué código HTTP recibe el cliente al crear un pedido y por qué? ¿Cómo introduciría un patrón \emph{Circuit Breaker}~\cite{Richardson2018Patterns} en esa integración?
+\end{itemize}
+
+% ===== SECCIÓN 5 =====
+\section{Entregables y condiciones}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item \textbf{Repositorio:} repositorio Git público (o con acceso al docente) con el código fuente de \emph{ambos} microservicios, Dockerfiles, \texttt{docker-compose.yml}, configuración del \emph{reverse proxy} y un \texttt{README.md} con instrucciones de compilación y despliegue completas.
+    \item \textbf{Análisis:} archivo \texttt{ANALISIS.md} con las respuestas del componente de análisis.
+    \item \textbf{Documentación de APIs:} especificación OpenAPI 3.0 exportada como YAML/JSON en \texttt{/docs/api/} del repositorio.
+    \item \textbf{Demostración:} demostración en vivo: levantar el \emph{stack} con \texttt{docker compose up}, ejecutar el flujo completo (crear producto, crear pedido, provocar un pedido que falle por producto inexistente, detener \texttt{svc-catalogo} y observar el comportamiento).
+    \item \textbf{Condición:} el prototipo debe levantarse con un único comando (\texttt{docker compose up --build}) siguiendo el \texttt{README}. Un proyecto que no levanta el \emph{stack} no puede acreditar los criterios funcionales.
+\end{itemize}
+
+% ===== SECCIÓN 6 =====
+\section{Restricciones técnicas}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.25em]
+    \item \textbf{Lenguaje y \emph{stack} sugerido:} Java 21 + Spring Boot 3.x + PostgreSQL 16, o alternativa equivalente (Python 3.11+ con FastAPI, o Node.js 20 con NestJS) siempre que se respeten las capas y el diseño RESTful.
+    \item \textbf{Contenerización obligatoria:} el sistema debe ejecutarse dentro de Docker Compose. No se aceptan ejecuciones ``en local'' o con IDE embebido durante la demostración.
+    \item \textbf{IDE de referencia:} IntelliJ IDEA (Community o Ultimate). Docker Desktop debe estar operativo.
+    \item El uso de asistentes de IA y de material de consulta se rige por la política indicada por el docente para esta evaluación. En la defensa, el estudiante debe poder explicar y justificar cada parte de su código sin leerlo textualmente.
+\end{itemize}
+
+% ===== SECCIÓN 7 =====
+\section{Rúbrica de evaluación}
+
+Cada criterio se valora en cuatro niveles: Excelente (4), Bueno (3), Regular (2) y Deficiente (1). Un criterio no entregado, con plagio verificado o que no corresponde recibe 0. La calificación final se obtiene como la suma ponderada de los niveles alcanzados, según la fórmula:
+
+\begin{center}
+    \textbf{Nota (sobre 10) = [ $\sum$ ($peso_i \times nivel_i$) $\div$ 4 ] $\times$ 10}
+\end{center}
+
+Donde los pesos se expresan como fracción (sumando 1{,}0) y el nivel es el valor 1 a 4 alcanzado en cada criterio. Si todos los criterios alcanzan el nivel Excelente, la nota es 10.
+
+\subsection*{Rúbrica de evaluación --- Examen Práctico Unidad 2}
+
+\renewcommand{\arraystretch}{1.35}
+\footnotesize
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.16\textwidth}|c|>{\raggedright\arraybackslash}p{0.17\textwidth}|>{\raggedright\arraybackslash}p{0.16\textwidth}|>{\raggedright\arraybackslash}p{0.16\textwidth}|>{\raggedright\arraybackslash}p{0.15\textwidth}|}
+    \hline
+    \rowcolor{uteqBlue!15}
+    \textbf{\color{uteqBlue}Criterio} &
+    \textbf{\color{uteqBlue}Peso} &
+    \textbf{\color{uteqBlue}Excelente (4)} &
+    \textbf{\color{uteqBlue}Bueno (3)} &
+    \textbf{\color{uteqBlue}Regular (2)} &
+    \textbf{\color{uteqBlue}Deficiente (1)} \\
+    \hline
+    \endfirsthead
+
+    \hline
+    \rowcolor{uteqBlue!15}
+    \textbf{\color{uteqBlue}Criterio} &
+    \textbf{\color{uteqBlue}Peso} &
+    \textbf{\color{uteqBlue}Excelente (4)} &
+    \textbf{\color{uteqBlue}Bueno (3)} &
+    \textbf{\color{uteqBlue}Regular (2)} &
+    \textbf{\color{uteqBlue}Deficiente (1)} \\
+    \hline
+    \endhead
+
+    \hline
+    \endfoot
+
+    \textbf{C1.} Arquitectura de microservicios y diseño en capas &
+        \textbf{20\,\%} &
+        Dos (o más) microservicios totalmente independientes, con \emph{Database per Service} correctamente aplicado, capas bien separadas y diagrama de arquitectura propio, claro y coherente. &
+        Microservicios separados con \emph{Database per Service}; alguna capa mezcla responsabilidades o el diagrama es genérico. &
+        Los microservicios comparten base de datos o las capas están mezcladas; diagrama superficial. &
+        Sistema monolítico con carpetas separadas; sin diagrama o incoherente. \\
+    \hline
+
+    \textbf{C2.} Diseño de la API REST (URIs, verbos y códigos de estado) &
+        \textbf{25\,\%} &
+        API en Nivel~2 (o superior) de Richardson: URIs consistentes (plural, versionadas, sin verbos), verbos HTTP con idempotencia respetada y códigos de estado correctos en \emph{todos} los casos exigidos (201, 204, 400, 404, 409). &
+        API en Nivel~2 con detalles menores: alguna URI inconsistente o un código de estado subóptimo. &
+        API en Nivel~1: usa recursos pero mezcla verbos y códigos de estado (p.\,ej.\ 200 para todo). &
+        API en Nivel~0 (un solo \emph{endpoint} tipo RPC) o URIs con verbos y sin códigos de estado significativos. \\
+    \hline
+
+    \textbf{C3.} Comunicación entre servicios con manejo de fallos &
+        \textbf{15\,\%} &
+        \texttt{svc-pedidos} llama a \texttt{svc-catalogo} con \emph{timeout} explícito; ante fallo del catálogo devuelve un código HTTP semánticamente correcto y consistente. &
+        Comunicación funcional con \emph{timeout} implícito o manejo de errores parcial. &
+        Comunicación funciona en el caso feliz pero bloquea o falla sin control cuando el catálogo no responde. &
+        No hay comunicación real entre servicios; los pedidos no validan producto o el flujo está codificado. \\
+    \hline
+
+    \textbf{C4.} Contenerización (Dockerfile \emph{multi-stage}) &
+        \textbf{15\,\%} &
+        Dockerfile \emph{multi-stage} para ambos servicios, imagen final ligera con solo JRE/JAR, usuario no-\texttt{root} y justificación de la imagen base en el \texttt{README}. &
+        \emph{Multi-stage} presente y funcional; falta el usuario no-\texttt{root} o la justificación de la imagen. &
+        Dockerfile de una sola etapa; la imagen final incluye el JDK y herramientas de \emph{build}. &
+        Dockerfile ausente, roto o no reproducible. \\
+    \hline
+
+    \textbf{C5.} Orquestación con Docker Compose y \emph{reverse proxy} &
+        \textbf{15\,\%} &
+        \texttt{docker-compose.yml} completo: red interna dedicada, volúmenes persistentes, \emph{healthchecks} funcionales, \texttt{depends\_on} con \texttt{service\_healthy} y Nginx enrutando correctamente ambos servicios; solo el puerto del \emph{reverse proxy} expuesto. &
+        \emph{Stack} operativo con detalles menores: falta un \emph{healthcheck}, se expone un puerto extra o el enrutamiento tiene una regla incorrecta. &
+        Los servicios levantan pero sin \emph{healthchecks}, sin volúmenes persistentes o sin \emph{reverse proxy}. &
+        El \emph{stack} no levanta o los servicios se comunican solo por IPs fijas y puertos publicados. \\
+    \hline
+
+    \textbf{C6.} Calidad del código, documentación y repositorio &
+        \textbf{5\,\%} &
+        Repositorio con historial de \emph{commits} coherente, código legible y organizado, \texttt{README} completo, especificación OpenAPI publicada y ejecutable con un solo comando. &
+        Repositorio funcional con \emph{README} claro; OpenAPI presente con detalles menores. &
+        Ejecuta con dificultad o instrucciones incompletas; código desordenado. &
+        No compila/ejecuta o no hay repositorio utilizable. \\
+    \hline
+
+    \textbf{C7.} Análisis y defensa técnica &
+        \textbf{5\,\%} &
+        Responde con precisión, cita conceptos correctamente (restricciones REST, nivel Richardson, \emph{Circuit Breaker}, \emph{trade-offs} REST/gRPC) y defiende su código sin leerlo, razonando ante preguntas inesperadas. &
+        Análisis correcto en lo esencial con alguna imprecisión; defensa sólida. &
+        Análisis superficial o parcialmente erróneo; defensa dubitativa. &
+        No conecta la práctica con la teoría; no defiende su solución. \\
+    \hline
+\end{longtable}
+\normalsize
+
+\vspace{0.4em}
+
+\begin{warnbox}[Condiciones que penalizan de forma no negociable]
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.2em]
+        \item Si el \emph{stack} \textbf{no levanta} con \texttt{docker compose up --build}, C4 y C5 se califican como Deficiente (1) automáticamente, y C3 no puede superar Regular (2).
+        \item Si las URIs contienen verbos en la ruta (p.\,ej.\ \texttt{POST /crearProducto}), C2 no puede superar Regular (2), independientemente de los demás criterios.
+        \item Si los dos microservicios comparten la misma base de datos, C1 no puede superar Regular (2).
+        \item Si el \emph{reverse proxy} está ausente y los microservicios se exponen directamente al \emph{host}, C5 no puede superar Regular (2).
+        \item Plagio verificado en cualquier parte del entregable: calificación 0 en el examen.
+    \end{itemize}
+\end{warnbox}
+
+\vspace{0.4em}
+
+\textbf{Nota:} ``0 puntos'' se asigna a un criterio no entregado, con plagio verificado o que no corresponde al criterio. La calificación final aplica la fórmula ponderada indicada en el encabezado de esta sección.
+
+% ===== BIBLIOGRAFÍA =====
+\vspace{0.6em}
+\section*{Referencias bibliográficas}
+\addcontentsline{toc}{section}{Referencias bibliográficas}
+
+\bibliographystyle{ieeetr}
+\bibliography{references_U2}
+
+\end{document}
