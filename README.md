@@ -19,9 +19,7 @@ Jeremy Ruperto Gaibor Rodríguez
 ## Estructura del proyecto
 
 ```text
-MercadoQuevedo/
+Examen-Practico/
 ├── svc-catalogo/
 ├── svc-pedidos/
-├── nginx/
-├── docker-compose.yml
 ├── README.md
